@@ -1,0 +1,49 @@
+0. What’s stdint.h?
+    Answer: stdint.h is a header that declares sets of integer types to have fixed widths. For example, the fixed width integer types
+    can be created so that they all have the same number of bits across all implementations. Alternatively, you could declare the
+    integer types to have at least a certain number of bits, or to have the fewest number of bits available, and other categories as
+    well (fastest available, pointer integer types, maximum-width (what is the purpose of using the largest integer type? I don't 
+    fully understand this).
+
+1. What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+    Answer: By using uintN_t and intN_t, the programmer can declare these integer types to have an exact number of bits. The 'u' in
+    front of the int8_t or int32_t means that it is an unsigned integer type, versus a regular signed type. I'm not entirely sure,
+    but I believe the difference between these is that a signed type of size N can have any value between -(2^(n-1)) and 2^(n-1),
+    whereas an unsigned type of size N can have any value between 0 and 2^(n-1).
+
+2. How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+    Answer: Because a byte is 8 bits, a BYTE is 1 byte (obviously), a DWORD is 4 bytes, a LONG is 4 bytes, and a WORD is 2 bytes.
+
+3. What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats
+(with high probability) are generally called "magic numbers."
+    Answer: The first two bytes of a BMP file must be, in ASCII, the letter 'B' and then 'M' to signify that it is a BMP file type.
+
+4. What’s the difference between bfSize and biSize?
+    Answer: bfSize is the size in bytes of the bitmap file, and biSize is number of bytes required by the structure.
+
+5. What does it mean if biHeight is negative?
+    Answer: It means the bitmap is a top-down DIB (device independent bitmap) with an origin in the upper left corner.
+
+6. What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+    Answer: biBitCount. It "determines the number of bits that define each pixel and the maximum number of colors in the bitmap."
+
+7. Why might fopen return NULL in lines 24 and 32 of copy.c?
+    Answer: It might return NULL because (in line 24) the program couldn't open the file or (in line 32) the program couldn't
+    create the output file.
+
+8. Why is the third argument to fread always 1 in our code?
+    Answer: It's always 1 because it's always only reading 1 element of data at a time.
+
+9. What value does line 65 of copy.c assign to padding if bi.biWidth is 3?
+    Answer: The line is the following:
+     int padding =  (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    This means that if the bi.biWidth is 3, then the width of the bitmap is 3 pixels. 1 pixel is 3 bytes, so this is 9 bytes.
+    Because the width has to be a multiple of 4, the padding is 3 bytes because 9 + 3 = 12, 12 % 4 = 0. 
+
+10. What does fseek do?
+    Answer: fseek "sets the file position indicator for the stream pointed to by stream." In our program, this means it skips
+    over the padding, presumably to get to the next RGB triple (the next pixel).
+
+11. What is SEEK_CUR?
+    Answer: SEEK_CUR is an integer constant that is used in fseek that "specifies that the offset provided is relative to the
+    current file position."
