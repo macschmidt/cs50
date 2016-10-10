@@ -1,0 +1,41 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+    Answer: It is "a pneumoconiosis caused by inhalation of very fine silicate or quartz dust" 
+    (http://www.merriam-webster.com/medical/pneumonoultramicroscopicsilicovolcanoconiosis)
+    
+1.  According to its man page, what does getrusage do?
+    Answer: getrusage "returns resource usage measures," which for our purposes in this program, is going to return how long each
+    of the proccesses run for (telling us their real-time efficiency).
+    
+2.  Per that same man page, how many members are in a variable of type struct rusage?
+    Answer: In the struct rusage, there are two separate structs (timeval ru_utime and timeval ru_stime) and then also fourteen
+    longs (ru_maxrss, ru_ixrss, ru_idrss, ru_isrss, ru_minflt, ru_majflt, ru_nswap, ru_inblock, ru_oublock, ru_msgsnd, ru_msgrcv,
+    ru_nsignals, ru_nvcsw, and ru_nivcsw).
+    
+3.  Why do you think we pass before and after by reference (instead of by value) to calculate, even though we’re not changing their 
+    contents?
+    Answer: If we called by value before and after, it would take memory (and time) to actually get these values because of the 
+    structure of rusage. Instead, passing before and after by reference doesn't require actually reading all of the structure 
+    contents for rusage, so it wouldn't alter the results of the time values like taking the value would (taking time to read the
+    structure would add to the actual time, so it wouldn't be right).
+    
+4.  Explain as precisely as possible, in a paragraph or more, how main goes about reading words from a file. In other words, 
+    convince us that you indeed understand how that function’s for loop works.
+    Answer: First, the loop checks to make sure that the current word contains only alphabetical characters and apostrophes. If the 
+    word does not and it contains numbers, then it moves through the word and prepares for a new word, because this one was not 
+    valid. At this point, we have a real word. The loop then checks the word’s spelling (using getrusage for timing) with the check 
+    method, updating times as it goes. The boolean “msispelled” returns the opposite of what check runs (because check returns true 
+    if the word is spelled correctly). If the misspelled variable is true, then it prints out the word and updates the index for the
+    misspelled words. The loop then prepares for the next word.
+    
+5.  Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a format string like 
+    "%s" to read whole words at a time? Put another way, what problems might arise by relying on fscanf alone?
+    Answer: By using fgetc, we can check each character as it goes into the loop. If we just analyzed by looking at the entire
+    string at once, then we would run into problems if a single character wasn't valid (for example, what if we had some weird or
+    random symbol in the word? fscanf would have issues with this, whereas fgetc can check each character as it goes with the
+    line "if (isalpha(c) || (c == '\'' && index > 0))".
+    
+6.  Why do you think we declared the parameters for check and load as const (which means "constant")?
+    Answer: They can be constants because those values are never going to change, aka they are constant. If their values changed
+    throughout the course of the run, then constants would cause problem. But as it is, having constants for the check method
+    "bool check(const char *word)" and using the dictionary as a constant in the load method "bool load(const char *dictionary)" is
+    logical because these values are never going to change.
