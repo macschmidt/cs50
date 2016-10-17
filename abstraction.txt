@@ -1,0 +1,32 @@
+= Abstraction
+
+== Answers
+
+1. Recall that we described stacks and queues as "abstract data types" as opposed to "data structures." In what sense are stacks and
+queues abstractions?
+    Answer: Stacks and queues are more "abstract data types" than "data structures" because we worry more about the semantics and
+    higher level ideas than the implementation details. For example, with a stack, we worry about the notions of "pushing" and
+    "popping" elements off the stack, just like trays in a cafeteria. The most important concept with stacks is Last-In, First-Out,
+    which is a very conceptual idea rather than hard-coding. The same goes for queues (except FIFO instead of LIFO) – abstract data
+    types are "defined indirectly, only by the operations that may be performed on it and by mathematical constraints on the effects
+    (and possibly cost) of those operations" – in this way, we worry more about how our operations (push and pop, for example) 
+    affect the stack rather than the implementation details of how we "push" and "pop."
+    
+2. Recall that say is a function in Scratch. In what sense is say an abstraction?
+    Answer: Say is an abstraction in that it contains a higher-level idea for the sprite to "say," or display some text that the
+    user defines, onto the screen, but the user doesn't need to be complicated with the lower-level implementation details of how
+    the sprite ACTUALLY says what the user tells it to say. Scratch itself is very abstract in that the user, generally someone
+    new to coding, doesn't need to worry too much about the syntax or details but instead just focus on the concepts.
+
+3. Recall that string is defined in the CS50 Library. In what sense is string an abstraction?
+    Answer: string is an abstraction because at its lowest level, it's an array of characters that combine to create a "string,"
+    which is basically just an easier way to refer to this collection of characters. However, at the higher-level, we don't focus
+    on the array of characters (although we can and we have), we worry about strings with more high-level ideas (like strlen(), for
+    example).
+
+== Debrief
+
+1. https://study.cs50.net/stacks, https://study.cs50.net/queues, and 
+http://stackoverflow.com/questions/10267084/what-is-adt-abstract-data-type
+
+2. About 30 minutes.

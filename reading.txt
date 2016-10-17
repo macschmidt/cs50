@@ -1,0 +1,39 @@
+= Reading Someone Else's Code
+
+== Answers
+
+1. Why do we return CHAR_MAX on failure in get_char (when its call to get_string returns NULL) rather than NULL?
+    Answer: We return CHAR_MAX on failure in get_char because if you try to return NULL, you'll get an error because pointers are
+    the only objects in C that can be null. In get_string, you are returning a string, which is the same as a char *, so that can
+    return NULL because it is allowed to be null. Characters, on the other hand, are not pointers, and therefore cannot be set to
+    NULL, so for a program that is set to return a character like get_char is, you cannto return NULL wihtout getting an error
+    like "incompatible pointer to integer conversion returning 'void *' from a function with result type 'char'".
+    
+2. If get_char, per its own name, is meant to get just one char from a user, why do we try to read two via sscanf?
+    Answer: In the reference for sscanf, we can see that sscanf returns "the number of input items successfully matched and 
+    assigned, which can be fewer than provided for". This means that even though get_char tries to read two characters in via
+    sscanf, it's actually only checking to see if the "&c" character is a valid character. The "&d" character is NOT SUPPOSED to
+    return 1 (and therefore 2, if "&c" is a valid character), because we're only supposed to be looking for one character. So if
+    the user puts any character after the first character (and therefore enters not only one character, as the program desires),
+    then it will not return the first character and instead will display "Retry: ".
+
+3. Why do we declare allocations and strings as static? What might happen if we didn’t?
+    Answer: We declare them as static because we do not want them to lose their value between function calls. If we did not declare 
+    allocations and strings as static, their values wouldn't change between functions, and the functions themselves would be
+    inherently pointless because you wouldn't actually be changing anything. In this way, static variables work like global
+    variables, but they are only visible within the c file they are defined in (that's why we have to #include <cs50.h> if we want
+    to use any of the functions like get_char because get_char has variables inside of it that it requires to operate).
+
+4. How does the library ensure that every string allocated by get_string is eventually freed?
+    Answer: It uses teardown, which frees any strings that are not already equal to NULL. It runs through a for-loop from strings[0]
+    to strings[allocations], where allocations is the "number of strings allocated by get_string", so as to cover every string that 
+    needs to be freed, and frees the memory at that location in the array strings, which contains the "array of strings allocated
+    by get_string".
+
+== Debrief
+
+1. http://stackoverflow.com/questions/572547/what-does-static-mean-in-a-c-program, 
+http://stackoverflow.com/questions/5608179/setting-a-string-to-null-in-c, 
+http://stackoverflow.com/questions/7660382/why-does-function-cause-this-compiler-warning-incompatible-pointer-to-integer-c
+
+2. About 45 minutes.

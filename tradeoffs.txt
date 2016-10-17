@@ -1,0 +1,46 @@
+= Tradeoffs
+
+== Answers
+
+Think of a problem and two algorithms, x and y, either of which could be used to solve that same problem.
+1a. The problem is I have an array of numbers and I want to search the array for a specific number to see if it is within that
+array. Algorithm x is linear search, and algorithm y is binary search.
+
+1b. What advantage does x have over y?
+    Answer: Linear search is better if my array of numbers is unsorted. This means that worst-case, I check each and every element
+    to see if it is the one I am searching for (O(n) and Omega(1)). This is much better than binary search, because if the list is
+    not sorted, then binary search has to sort the entire array and THEN search through, which could take significantly longer than
+    simply looking through the array, one element at a time.
+
+1c. What advantage does y have over x?
+    Answer: Binary search is better if my array of numbers is sorted. With a sorted array, binary search operates in O(log(n)) time,
+    which is far better than the O(n) time that linear search would have to run on to find an element in this sorted array. In this
+    way, binary search takes advantage of the fact that the array is already sorted, and looks left or right of the element
+    depending on how large the item is and how large my desired item is, whereas linear search blindly goes through the entire
+    array, even when it may not be necessary.
+
+Think of a problem (same or different) and two data structures, x and y, either of which could be used to solve that same problem.
+2a. What’s the problem, and what are x and y?
+    Answer: The problem is I want to store the names of people I meet at Yale in a data structure. x is a hashtable, and y is a 
+    linked list.
+
+2b. What advantage does x have over y?
+    Answer: The hash table has the advantage over the linked list in that it is far more efficient if I want to search for someone
+    within my data structure. After all, say with my bad memory, I meet someone twice but don't remember if I had met them already.
+    With a hash table, I can search very quickly through the structure by simply checking that address in memory for the name, and
+    adding the person if they aren't there. Linked lists are very slow, and if this person was hypothetically the very first person
+    I had ever met at Yale, and I had been adding new people to the front of my linked list, then they would be at the very end of
+    my linked list, and searching for them would be very slow.
+
+2c. What advantage does y have over x?
+    Answer: The linked list has the advantage over the hash table in that it can add the names of the people very quickly, and it 
+    doesn't take any time to generate an address for the person's name through the use of a hash function, which can take up time.
+    This also makes the linked list very memory-friendly, as I am wasting little to no space in memory, because I am simply adding
+    the person to the linked list.
+
+== Debrief
+
+1. Our section 2 powerpoint about the efficiency, benefits, and downsides of searching/sorting algorithms, and our section 4
+powerpoint about the efficiency, benefits, and downsides of different data structures.
+
+2. About 30 minutes.

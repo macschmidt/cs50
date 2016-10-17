@@ -1,0 +1,37 @@
+= Restructuring Strings
+
+== Answers
+
+1. What’s an advantage of this alternative representation of strings?
+    Answer: An advantage of this alternative representation of strings is that we don't have to go through the entire
+    character array/string in order to find out how long it is. Instead, we can simply look at the first element of the character
+    array and we have the length available to use right away. We also wouldn't have to constantly look for the '\0' symbol, 
+    because we could know when we run into an integer (and not a character representing an integer, as I'll explain below) that we
+    have come to our next word. You could even use the isalpha() function for this check.
+
+2. What’s a disadvantage of this alternative representation of strings?
+    Answer: A disadantage of this alternative representation might be when you have multiple strings in memory and you don't
+    necessarily want to look at the first string. This requires you to keep track of your location within your current string,
+    which also requires resetting when you get to another word, denoted by an integer. I would imagine that you would also have
+    to be careful about moving from one word to another if these strings contain integers, because you would have to be sure to 
+    distinguish between integers that are simply characters within the string versus integers that are used to show when to move to
+    the next word (ie. an ASCII of '50' would mean the number 2, but the number 2 could easily be confused as '2' instead, meaning
+    STX).
+
+3. Complete the reimplementation of strlen, below, in such a way that it returns the length of a string that’s implemented per this 
+alternative representation.
+    Answer:
+
+#include <string.h>
+
+size_t strlen(const char *s)
+{
+    return s[0];
+}
+
+== Debrief
+
+1. Used http://stackoverflow.com/questions/586928/how-should-i-print-types-like-off-t-and-size-t just for some basic testing 
+because I was unsure of how to print out the type size_t.
+
+2. About 30 minutes.

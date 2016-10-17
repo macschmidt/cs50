@@ -1,0 +1,86 @@
+= Insecurity
+
+== Answers
+
+1. Why is this file format not very secure?
+    Answer: This file format is not very secure because if the password is simply eight numbers, it wouldn't be hard for someone
+    to use an algorithm that simply tries every password from 0000000 to 99999999 with hard coding (as in trying each combination).
+    If you wanted the file to be more secure, you might try using hashing and a hashcode to encrypt the password, which would make
+    it a lot more secure than simply an eight numbered password. Also, someone could simply write a program like we did below that
+    moves past the password in the file and copy the other contents of the file to a new file, thereby accessing it without even
+    needing the password.
+
+2. Complete the implementation of the program below in such a way that it removes the password from a password-protected text file, 
+storing just its text in a new passwordless text file. Assume that the program will be executed with two command-line arguments: the
+path to the former will be provided in argv[1], and the path to the latter will be provided in argv[2].
+    Answer:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct
+{
+    char password[8];
+}
+FILEHEADER;
+
+int main(int argc, char* argv[]) 
+{
+    // ensuring proper usage
+    if (argc != 3)
+    {
+        fprintf(stderr, "Format: ./thisfilename inputfile outputfile");
+        return 1;
+    }
+    
+    // naming the input and output files taken from the arguments in the command line
+    char *infile = argv[1];
+    char *outfile = argv[2];
+
+    FILE *outputFile = fopen(outfile, "w");
+    
+    // error checking 
+    if(outputFile == NULL)
+    {
+        fprintf(stderr, "Could not create file output.txt!");
+        return 1;
+    }
+    
+    // This opens the file "input.txt" in read-only mode
+    FILE *inputFile = fopen(infile, "r");
+
+    // Again, we must make sure fopen doesn't return NULL
+    if(inputFile == NULL)
+    {
+        fprintf(stderr, "Could not open file input.txt!");
+        return 2;    
+    }
+    
+    // read infile's FILEHEADER (this moves past the password)
+    FILEHEADER fh;
+    fread(&fh, sizeof(FILEHEADER), 1, inputFile);
+    
+    int currentCharacter = fgetc(inputFile);
+
+    while(currentCharacter != EOF)
+    {
+        // This writes our currentChracter to the output file
+        fputc(currentCharacter, outputFile);
+        
+        // This reads the next character from the input file and updates currentChar accordingly
+        currentCharacter = fgetc(inputFile);
+        
+        // If we've reached the end of our file, currentCharacter will be equal to EOF, so our loop will terminate
+    }
+
+    fclose(inputFile);
+    
+    fclose(outputFile);
+}
+
+== Debrief
+
+1. I looked at resize.c and bmp.h to figure out including headers, and I also looked at code from our section work where we copy
+text from one file to another (used that code as the basis for this code).
+
+2. About an hour.
