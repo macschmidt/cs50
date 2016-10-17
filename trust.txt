@@ -1,0 +1,34 @@
+= Trusting `clang`
+
+== Answers
+
+1. Suppose that you wish to alter the C compiler to include the sequence \N to represent the new line character so that programmers 
+can print new lines, as via printf, either with \n or \N. What line of code could you add or change in Figure 2.3 in order to 
+support \N?
+    Answer: You could change the code on line 7 from
+    
+if(c == 'n')
+
+    to
+    
+if(c == 'n' || c == 'N')
+
+    This would allow either '\n' or '\N' to result in the same output as '\n', which creates a new line.
+
+2. Even though clang is open-source (which means that its source code is publicly available), why should you still not trust it, 
+given that you could inspect its code for Trojan horses? And why should you not trust clang even if you compiled it yourself?
+    Answer: Even though clang is open-source, you still shouldn't trust it because as Thompson explains in figure 3.3, by putting
+    that second trojan horse into the code, he was able to basically replace the "official" binary of C with his bugged binary,
+    which allows him to remove the bugs from the source of the compiler, but because the new "official" binary is bugged, it will
+    re-add the bugs back in when it's compiled without even leaving a trace, because the compiler has no idea that this "offical"
+    binary is actually bugged binary ("the login command will remain bugged with no trace in source anywhere"). In this scenario,
+    even if you checked the code for trojan-horses yourself, because the code itself could be bugged without a "trace in source
+    anywhere." Even if I compiled clang myself, this doesn't prevent clang from having bugs. They could be the same type as 
+    Thompson describes – to clang, clang's binary may seem like the "official" binary even though it's been bugged and hidden, and 
+    as the compiler, we have no way of knowing if this binary is bugged or not, because compiling alone will not show these bugs.
+    
+== Debrief
+
+1. None
+
+2. About 30 minutes.

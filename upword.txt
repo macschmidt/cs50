@@ -1,0 +1,64 @@
+= What's Upword?
+
+== Answers
+
+1. Is forty an upword?
+    Answer: Yes (F before O before R before T before Y).
+
+2. Is fifty an upword?
+    Answer: No (F before I, but I is not before the next F in the alphabet).
+
+3. Complete the implementation of upword, below, in such a way that it returns true if and only if word is an upword. Return false 
+if word is NULL, if word contains one or more non-alphabetical characters, or if the letters in word are not alphabetically sorted, 
+case-insensitively.
+    Answer:
+#include <ctype.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+
+bool upword(const char *word)
+{
+    if (word == NULL)
+    {
+        return false;
+    }
+    
+    int length = strlen(word);
+    char lowercaseWord[length];
+    int asciiWord[length];
+    
+    for (int i = 0; i < length; i++)
+    {
+        if (isalpha(word[i]) == 0)
+        {
+            return false;
+        }
+        
+        // change letter to lower case, if applicable
+        lowercaseWord[i] = tolower(word[i]);
+        // add letter to array of ascii numbers
+        asciiWord[i] = lowercaseWord[i] - '0';
+    }
+    
+    int lastLetter = asciiWord[0];
+    
+    for (int i = 1; i < length; i++)
+    {
+        // check to see if this character is before
+        if (asciiWord[i] < lastLetter)
+        {
+            return false;
+        }
+        
+        lastLetter = asciiWord[i];
+    }
+    return true;
+}
+
+== Debrief
+
+1. Used http://stackoverflow.com/questions/17307275/what-is-the-printf-format-specifier-for-bool for testing because I was unsure
+of the print format specifier for booleans
+
+2. About 45 minutes.

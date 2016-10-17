@@ -1,0 +1,43 @@
+= Story to Share
+
+== Answers
+
+1. Why doesn’t Medium just use an array to store, for each user, the unique identifiers of the posts that a user has already read?
+    Answer: Medium doesn't just use an array to store the identifiers of the posts a user has already read because the number of
+    posts a user has already read is constantly growing in size, and you want a data structure that has dynamic memory. The data
+    structure they use, a hash table, allows them to continuously add items (identifiers of posts) to the structure without having
+    to do expensive memory reallocation every time.
+
+2. Why doesn’t Medium just use a linked list to store, for each user, the unique identifiers of the posts that a user has already 
+read?
+    Answer: While a linked list would be better than an array for storing the identifiers of posts a user has already read because
+    you can insert and delete items easily, linked lists are bad at accessing elements within the list itself, so if a user wanted
+    to find a post they had read, the program (in worst case scenario) would have to look through every element of the linked list,
+    which is very slow and bad. The bloom filter, on the other hand, allows the user to quickly find what it's looking for in 
+    memory, which, in this instance of looking for a post they've read, is very useful.
+
+3. Why doesn’t Medium just use a trie to store, for each user, the unique identifiers of the posts that a user has already read, 
+effectively treating the identifiers like words in a dictionary?
+    Answer: Using a trie wouldn't work because of the way the hash function operates. The hash function generates a random 
+    "fingerprint" of where that item (identifier of a post) is in memory. They key component of this is that it's random – even if 
+    two inputs are very similar themselves, they won't have similar outputs ("similar inputs should not give similar outputs"). One 
+    of the biggest upsides of tries is that they are very good at keeping track of strings in sorted order, but that isn't really 
+    that helpful here, because it isn't that important to sort these strings in a certain order, as the hash function is random. In 
+    addition, tries take up a lot of memory, so they have a high memory cost for doing something we don't need them to do.
+
+4. Why does Medium sometimes think a user has read some post, even though the user has not?
+    Answer: Medium does this because of the way the bloom filter structure works. As given by the example on the page
+    https://blog.medium.com/what-are-bloom-filters-1ec2a50c68ff#.stzhjskyf, with multiple items stored in the bloom filter with
+    different buckets filled for different items (these items being posts the user has read, and the buckets containing parts of the
+    addresses/hash-function-outputs, you can occasionally get a false positive that the user has read a post at a certain address
+    because all of the components that make up that address are in memory, albeit separately and perhaps contributed by multiple 
+    different addresses. They use the example that 'cat' might contain numbers in the 3 and 4 buckets, and maybe 'dog' has numbers
+    in the 6 and 8 buckets. If 'elephant' (or a post that we want to see if the reader has already read, in this case) has the
+    address of 4 and 8, then because these buckets are already filled, Medium will think that 'elephant' is stored (or that this
+    post has been read already, when in fact it hasn't).
+
+== Debrief
+
+1. Our section powerpoint on data structures, especially the slides on the benefits and downsides of each.
+
+2. About 30 minutes.

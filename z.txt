@@ -1,0 +1,66 @@
+= Z
+
+== Answers
+
+1. Write a program in Z that gets two integers from the user and then prints "equal" if and only if the two integers are equal. 
+Assume that the user will indeed input integers.
+    Answer:
+
+function main()
+{
+    // get numbers from the user
+    $firstNum <- get()
+    $secondNum <- get()
+    $firstMinusOne <- add($firstNum, -1)
+    $firstPlusOne <- add($secondNum, 1)
+
+    // run the function to check if they are equal
+    checkEqual($firstNum, $secondNum, $firstMinusOne, $firstPlusOne)
+}
+
+// note: this function only works because the numbers are integers. Otherwise, it wouldn't work properly.
+function checkEqual($firstNum, $secondNum, $firstMinusOne, $firstPlusOne)
+{
+    if ($secondNum < $firstPlusOne)
+    {
+        if ($firstMinusOne < $secondNum)
+        {
+            print("equal")
+        }
+    }
+}
+
+2. Write a program in Z that gets an integer from the user and then prints, one per line, all of the integers from that number 
+through (i.e., including) 0, starting with that integer and ending with 0. Assume that the user will input a positive integer.
+    Answer:
+    
+function main()
+{
+    $num <- get()
+    checkZero($num)
+}
+
+function checkZero($currentNum)
+{
+    $oneMinus <- add($currentNum, -1)
+    
+    // if the current number is greater than 0
+    if (0 < $currentNum)
+    {
+        // print the number
+        print($currentNum)
+        
+        // print a new line
+        print("\n")
+        
+        // run check zero again with currentNum - 1
+        checkZero($oneMinus)
+    }
+    print(0)
+}
+
+== Debrief
+
+1. None.
+
+2. About an hour.

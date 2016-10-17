@@ -1,0 +1,23 @@
+= Bleep
+
+== Answers
+
+1. Not only does this program bleep four-letter words, it also censors puppy and kitten, though not dog or cat, plus quite a few 
+other words. (On much longer inputs, it instead segfaults.) Why does it censor such adorable words?
+    Answer: In short, the program puts the first four characters of the given word ('puppy' or 'kitten', for example), so if the 
+    word is longer than 4 characters long, it only fills the first four characters. This makes the program think that strlen(word)
+    is 4, when in actuality it's longer. So the program sets the boolean bleep to true, outputting "$#@!", which is wrong.
+
+2. Propose how to fix the program so that it works as expected.
+    Answer: I propose a simple fix, although not perfect, but it works for this program. Include a '#define MAX_LENGTH 45;' at the
+    beginning of the program, and then use 'char word[MAX_LENGTH]' instead of 'char word[4]' becuase 45 is the 
+    maximum length of a word in the English dictionary (see the dictionary.h file in pset5 for this information). This allows the 
+    word to not only fill the first four letters (which resulted in 'kitten' and 'puppy' returning "$#@!"), but it also solves the
+    segmentation fault, because words don't overfill the char array. You could set MAX_LENGTH to a larger value than 45, but this
+    compromises memory and is unnecessary if we can assume that the user will enter an actual word.
+
+== Debrief
+
+1. http://web.mit.edu/10.001/Web/Tips/tips_on_segmentation.html, PSET5/dictionary.h, and https://reference.cs50.net/stdio/scanf
+
+2. About 45 minutes.
