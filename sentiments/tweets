@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+# TODO
+
+import sys
+
+from analyzer import Analyzer
+from termcolor import colored
+import helpers
+
+def main():
+
+    # ensure proper usage
+    if len(sys.argv) != 2:
+        sys.exit("Usage: ./tweets @username")
+
+    # instantiate analyzer
+    analyzer = Analyzer()
+    
+    username = sys.argv[1]
+    
+    if username.startswith("@"):
+        username = username[1:]
+    
+    # create a list for what helpers.get_user_timeline() is going to return
+    tweets = helpers.get_user_timeline(username, 50)
+    
+    if not tweets:
+        sys.exit("Invalid username.")
+    
+    # iterate through each tweet in the list of tweets
+    for currentTweet in tweets:
+        # calculate the score for that tweet
+        score = analyzer.analyze(currentTweet)
+        # print the output in the correct format
+        if score > 0.0:
+            print(colored("{} {}".format(score, currentTweet), "green"))
+        elif score < 0.0:
+            print(colored("{} {}".format(score, currentTweet), "red"))
+        else:
+            print(colored("{} {}".format(score, currentTweet), "yellow"))
+
+if __name__ == "__main__":
+    main()
