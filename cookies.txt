@@ -1,0 +1,51 @@
+= Cookies
+
+== Answers
+
+1. 
+
+function validate(phone)
+{
+    var length = phone.length;
+    // Check both if the length is 10 and if the variable is NotANumber (isNan)
+    if (length == 10 && !isNan(phone))
+    {
+        // if it satisfies both of these conditions, return true
+        return true;
+    }
+    // otherwise, return false
+    return false;
+}
+
+2.
+
+function validate(phone)
+{
+    // get rid of any '-', ' ', '(', and ')' characters to make the formatting nice!
+    // NOTE: The following line of code was aided by this page: 
+    // http://stackoverflow.com/questions/9115392/jquery-replace-all-parentheses-in-a-string
+    phone.replace(/-/g, "").replace(/ /g, "").replace(/\(|\)/g);
+    
+    var length = phone.length;
+    // Check both if the length is 10 and if the variable is NotANumber (isNan)
+    if (length == 10 && !isNan(phone))
+    {
+        // if it satisfies both of these conditions, return true
+        return true;
+    }
+    // otherwise, return false
+    return false;
+}
+
+3. Critique this implementation of profile, identifying its faults.
+    Answer: This implementation of profile isn't great because of the way SQL works. We saw in our previous two psets, and
+    especially in pset7, that SQL is inherently at risk of injection attack. To prevent this, we use named bind parameters so that
+    we prevent against this injection. In addition, it is poor form to use .format because this can also lead to an SQL injection
+    attack. Basically, if you want your code to get injected, go ahead and use this implementation (please don't).
+
+== Debrief
+
+1. As mentioned above, Pset 7 and 8 and http://stackoverflow.com/questions/9115392/jquery-replace-all-parentheses-in-a-string
+
+
+2. About 30-45 minutes.

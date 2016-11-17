@@ -1,0 +1,33 @@
+= Machine Learning Mario
+
+== Answers
+
+1. What does it mean for an algorithm to be "stateless"? In what sense is autocomplete, as implemented in Google Keyboard on Android
+or QuickType on iOS, stateful?
+    Answer: An algorithm is stateless if the algorithm keeps "no record of previous interactions and each interaction request has to
+    be handled based entirely on information that comes with it" (see sources below). Basically, in the context of autocomplete,
+    the autocomplete algorith is stateful ("keeps track of the state of interaction, usually by setting values in a storage field 
+    designated for that purpose" (see sources below)) because it literally depends on the state of interaction. You can't complete
+    a word without knowing what you currently have, so in order to complete the word, you must constantly check to see if the word
+    has changed and give recommendations based on the current state of the word.
+
+2. Apparent in the text representation are a number of patterns. For instance, at the bottom of most columns of text is a =. 
+Identify two (2) other patterns in the text representation that a (good) machine-learning algorithm should recognize once trained.
+    Answer: First: whenever there is a 'P' character, there will always be another to the right of that character (if it's the first
+    one you see), and this will only ever be two 'P' characters wide. In addition, this will be a stack of P characters at least 
+    two characters tall, sometimes more, but only ever as wide as the original base. Second: The '#' and '?' characters never have
+    any characters other than '-' above or below them; they are only ever in rows of height one.
+
+3. Suppose that you’ve implemented as your final project your very own search engine using the very same algorithms that Google 
+itself uses. Why might Google’s search engine nonetheless be much better than yours, even with identical algorithms?
+    Answer: Google's search engine might still be much better than mine because Google's search engine has tons and tons of data
+    from previous searches from users all over the world, and because of this data and having stateful aglorithms, Google can use
+    this data to refine the searches for different users and make their searches more accurate and more helpful (depending on the
+    user). My hypothetical algorithms have none of this data – they are basically running stateless because they have zero prior
+    record of data or interactions to go off of.
+
+== Debrief
+
+1. http://whatis.techtarget.com/definition/stateless
+
+2. About 30-45 minutes.

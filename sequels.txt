@@ -1,0 +1,38 @@
+= SQL Sequels
+
+== Answers
+
+1. With what SQL query could you select from films the titles of all sequels to Toy Story, including Toy Story 2, Toy Story 3, and 
+any future (similarly numbered) sequels?
+    Answer: 
+SELECT title FROM "films" WHERE title LIKE 'Toy Story%';
+
+2. With what SQL statement could you insert Hannibal (2001), the sequel to The Silence of the Lambs (1991), which earned 16% more 
+than its predecessor? We leave it to you to decide how to insert a percentage.
+    Answer: Note: I have the 'increase' column as a text type.
+INSERT INTO films VALUES ('Hannibal', '2001', 'Silence of the Lambs', '1991', '16%');
+
+3. It turns out that each column in a SQLite database has a "type affinity," the recommended type for data stored in that column 
+which can be any of TEXT, NUMERIC, INTEGER, REAL, and BLOB. But each value stored in a SQLite database has a "storage class" (i.e., 
+actual type, which determines how the value is stored on disk), which can be any of NULL, INTEGER, REAL, TEXT, and BLOB. It would 
+seem that NUMERIC, then, is not an actual type, just an affinity. According to SQLite’s documentation, what storage class would 
+SQLite use to store the 16% you just inserted? Why?
+    Answer: It would probably be stored in the storage class TEXT. This is because it is easy for "numerical data inserted into a
+    column with TEXT affinity" to be converted into text before being stored, and then the '%' is easily stored. The only other 
+    type affinity that would seem logical would be NUMERIC but the textual character '%' would cause problems, as you can't convert
+    it to an INTEGER or REAL logically.
+    
+4. Notice how this table contains some data redundantly. Not only does Toy Story 2 (1999) appear as a film, it also appears as a 
+predecessor, with its title and year repeated (in other columns). Suppose that this table must be dropped and replaced with (at 
+least) two tables that, together, eliminate that redundancy. With what SQL statements could you create those new tables? We leave 
+the tables' names to you as well as the names of the tables' columns and types thereof. No need to insert any rows into the new 
+tables.
+    Answer:
+CREATE TABLE original_films (title TEXT, year INTEGER);
+CREATE TABLE sequel_films (title TEXT, year INTEGER, increase TEXT);
+
+== Debrief
+
+1. https://www.sqlite.org/datatype3.html
+
+2. About 45 - 60 minutes.
