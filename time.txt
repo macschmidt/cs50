@@ -1,0 +1,34 @@
+= It's Time Again
+
+== Answers
+
+1. Recall that a dict is essentially a hash table, most of whose operations are in O(1). And yet Copy is in O(n). Why?
+    Answer: If a dict is essentially a hash table, then we must consider the structure of a hash table. The problem with Copy for a
+    hash table lies in its benefits – hash tables are extremely quick at retreiving specific pieces of data, because all they have
+    to do is compute a hash code and perform a linear search at that specific bucket, which is Theta(1). However, if you think about
+    this on a broader scale, if you want to copy all of the contents of a hash table somewhere else, there isn't any way to iterate
+    through the hash table with this process. In fact, you're going to have to 'search' through each item and then send that item
+    to the new data structure. This means you're going to have to do the theta(1) process N times for the N number of items in the
+    hash table (or dict, in this case), which makes it an O(N) case.
+
+2. Recall that, for Sentiments in Problem Set 6, you had to load positive and negative words into memory. Why would a set have been 
+a better choice than a list for those words?
+    Answer: A set would have been a better choice because sets are good at containing unique values and checking for their 
+    existence and not iterating over the course of all of these values. In Sentiments, after the analysis of each word is completed,
+    they are assigned a number: 1, -1, or 0, which denotes their sentiment. Sets are much stronger at simply searching for a value,
+    whereas lists are good at iterating over all of the values. With a set, you could simply search for the 1 or -1 or 0 designator
+    and get your results back immediately, instead of having to iterate over an entire list, word by word, individually. This would
+    end up saving a lot of time if you had enough words.
+    
+3. Recall that strlen is in O(n) for strings in C. Though not documented, it turns out that len is in O(1) for strings in Python. 
+How could that be?
+    Answer: This is because strings in Python are a special kind of class that almost serve as objects. As these special objects,
+    strings keep track of their own length using "__len__" method. So, when you call len for a string, it is O(1) because it doesn't
+    have to go through the entire string to calculate it's length – rather, it is already calculated when the string is created, and
+    then it is simply a matter of telling the object-like string to return it's length, which is simply O(1) time.
+
+== Debrief
+
+1. http://stackoverflow.com/questions/2831212/python-sets-vs-lists and https://docs.python.org/2/library/sets.html
+
+2. About 45 minutes.

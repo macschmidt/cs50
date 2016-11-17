@@ -1,0 +1,42 @@
+= Downword
+
+== Answers
+
+1. Is spoonfed a downword?
+    Answer: Yes, spoonfed is a downword (d --> e --> f --> n --> o (twice) --> p --> s is in alphabetical order.
+
+2. Is troll a downword?
+    Answer: Yes, troll is a downword (l (twice) --> o --> r --> t is in alphabetical order.
+
+3. Is this implementation of upword correct? Explain why or why not.
+    Answer: No, it is not. The implementation works when downward() is true (for "pond" for example), because if downward() returns
+    true, then upword() returns false, which is correct because p --> o --> n --> d is not sorted in alphabetical order from left
+    to right. However, when downward() is false (for "lake" for example), upword() returns the opposite of whatever downword()
+    returns, which in this case means upword() returns true. However, looking at "lake," it is not in alphabetical order from left
+    to right. 'L' is after 'a' in the alphabet, so upword() should return false, but it does not.
+
+4.
+
+def downword(word):
+    # this returns true if and only if word contains only alphabetical characters
+    if word.isalpha():
+        # now that we know it's a valid word, check to see if the word is in alphabetical order
+        # note: credit to http://stackoverflow.com/questions/13661479/checking-if-a-string-is-in-alphabetical-order-in-python
+        # note: have to start from back (len(word) and move backwards (increment of -1) and end at 0 (because -1 would be out of
+        # bounds)
+        for i in range(len(word) - 1, 0, -1):
+            # if a character is < than another character, then it comes before it in the alphabet, so return false
+            # if the first character comes before the second character in the alphabet, return false
+            if word[i - 1] < word[i]:
+                return False
+        # if you get through the whole word without returning false, then you should return true
+        return True
+    # return false if the word does not contain only alphabetical characters
+    return False
+
+== Debrief
+
+1. https://www.tutorialspoint.com/python/string_isalpha.htm and 
+http://stackoverflow.com/questions/13661479/checking-if-a-string-is-in-alphabetical-order-in-python
+
+2. About 30 minutes.

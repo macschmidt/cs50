@@ -1,0 +1,47 @@
+= Stranger Things
+
+== Answers
+
+1. Why were so many sites inaccessible during the attack on Dyn, even though the sites themselves were not offline?
+    Answer: Because Dyn is a company that provides "provides core Internet services for Twitter, SoundCloud, Spotify, Reddit and a 
+    host of other sites" (see article given to us, not an outside source), the sites themselves don't need to be attacked in order
+    to crash. In fact, by attacking a company that provides services to multiple large websites instead of the websites themselves,
+    the hackers were able to take down multiple websites simultaneously. This is because if the provider of important services for
+    a website is attacked through a DDoS and crashes that provider, then important functions on the websites the company provides
+    for aren't going to function, which in a way is like crashing those websites, except with less work.
+
+2. Why are so many IoT devices susceptible to malware?
+    Answer: So many IoT devices are susceptible to malware because there are tons of devices that have access to the internet but
+    are not protected by passwords and usernames because they aren't personal devices that users take the time to put passwords and
+    other forms of protection on. For example, routers, security cameras, printers, and DVRs aren't devices that you would protect
+    yourself because they aren't concerned about them being hacked (maybe security cameras, but a lot of people aren't concerned 
+    about their DVR or printer being hacked). So, when people install these devices, they either have no passwords or factory 
+    defaults, which are super easy to crack for hackers (see the list of well known passwords and admin information in the article).
+    Because of this, it is super easy for hackers to "guess" the passwords for various devices and take control of them, install
+    malware, and then lead to DDoS attacks like the one written about.
+
+3. What changes must a home router therefore make to a TCP/IP packet from some device before routing it toward some server on the 
+internet to ensure that it can relay the server’s response back to the same device? And when the server replies with a packet of its
+own, what should that packet’s destination IP address and destination port be? Assume that the home router has memory in which you 
+can store as much state as you’d like.
+    Answer: The home router should change the TCP/IP packet to include it's original source port – if the packet has this source
+    port, once it receives the packet back from some other servers, the packet will arrive at the home router, but because it has 
+    that original source port to signify the connection between the home router and the IoT device, it will send the packet to the
+    home router, which can see the source port and then send the packet to the corresponding device. When the server replies with a
+    packet of its own, the packet should have its source and desintation ports switched, so that "the return traffic can be mapped 
+    back to the original host address and port based on the information stored in the translation table" (see source provided to 
+    question 1). This translation table is a list of all of the connections made by the home router as it changes the source
+    address and source port of the connections that flow through it (this is the NAT function), which allows the router to keep 
+    track of the private addresses going to its own public IP address. So, when the packet comes back, it should have the public
+    IP address of the router but the original source port of the IoT device as the destination port so that the router knows how to
+    put the information into the translation table, which tells it which device to send it to.
+    
+    Note: This page I am referencing in this answer is super interesting and very helpful – I'm sure whoever is reading this 
+    understands this material very well, but it's still worth a read.
+
+== Debrief
+
+1. https://www.quora.com/If-two-devices-on-my-home-network-are-visiting-Facebook-simultaneously-how-does-my-router-know-which-device
+-to-send-which-packets-to
+
+2. About 60 minutes.
