@@ -1,0 +1,16 @@
+To begin, my project is a text-based Blackjack game with an option to play against a computer user as well. It is important for my
+project to function correctly that all of the necessary files (card.py, computer_player.py, dealer.py, deck.py, driver.py, hand.py,
+human_player.py, and player.py are all in the same folder, or else the program will not work. If they are all in the same folder,
+you can continue to the next step.
+
+To use my project, first save all of the files as you would any other python program. Then, in the terminal of where you are running
+the project (I just ran mine in the CS50 terminal), type the following: "python driver.py". This will run the main method of my 
+program and make the program begin running.
+
+Next, the program will repeatedly prompt you for different kinds of inputs. When prompted, please type in the type (number, name,
+etc.) of whatever the program asks you to type in, and then press return or enter. Note: I did not do error checking on types of 
+inputs, so if you try to enter a bunch of random characters or letters when prompted for a number, it will most likely crash the
+program. If this happens, just run the program again using "python driver.py". The game will proceed as a regular blackjack game
+might, as the screen prompts the user to hit, stand, surrender, or double down, as a blackjack game might (do not have split
+implemented). At the end of the round, the screen will prompt if you would like to play another round (player balances will carry 
+over, unless a user has zero balance, in which they case they are removed from the game). It is a fairly straight-forward program.

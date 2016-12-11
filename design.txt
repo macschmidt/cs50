@@ -1,0 +1,29 @@
+From the beginning of the school year, I know I wanted to (at some point) work on some kind of computer program that used AI in some
+way – it didn't have to be very advanced. So, for the final project, I talked to my TA (Adam Zucker is the best TA and you can 
+debate me in person if you feel otherwise) about what kind of things I could possibly implement, and he suggested that I do some
+kind of card game because of the simplicity of a CPU user that "counts cards." I settled on a text-based program simply because
+I wasn't as confident in my abilities with inheritance, classes, and then also porting the entire program to a web-based app would
+be a significant amount of work, and I wanted my focus to be on the program and the computer.
+
+I started my project somewhat blindly – I didn't have a great idea of what kind of structure my program was going to have, and it
+took until shortly before the due date that I realized my current construction wasn't going to be easy to implement and would be
+totally illogical. At this point, I shifted my focus onto making the blackjack program in a very organized, coherent manner, and 
+learn how to use classes and inheritance in a more effective way. I struggled for a long time in computer science prior to this 
+project with these concepts, and so I'm very excited now to have a much better handle on how they work and what a good structure
+might look like (minimize the number of unnecessary components, unnecessary code, have a logical hierarchy, etc.).
+
+As I worked on the program, I consciously made a few specific design choices that ultimately simplified my project. To begin, I did
+not implement a "Split" option, which is one of the standard options in Blackjack games. I did this because it created a serious
+problem with having multiple hands playing at once from the same user, and I found that considering the circumstances which surround
+a "good" split play (less than 1/13, mathematically speaking), I could probably let this go and try to fix it later. Another
+implementation choice I made was that I did not make an AI that counts cards as I was expecting to at the beginning of my project.
+Rather, I hard coded in the "smart" plays for a CPU to make based on their hand. This wasn't what I had hoped to do at the
+beginning of the project, but I found that returning cards to certain indexes within the deck caused problems, so I instead decided
+to 1) Only use one deck for each round and 2) Shuffle it before the start of every round so the results change. The random.shuffle()
+method was an amazing find here – it's so simple but so effective.
+
+To be quite honest, I think that this project is not as fully-fleshed out as it could be, but I am genuinely proud of what I've
+done. This is mainly due to the fact that I now have a much, MUCH better understanding of super and sub classes, inheritance, and
+just generally organizing my code in a logical manner. This actually ended up being a major focus of my project instead of the AI,
+and while I would have liked to have spent more time making an even better, cohesive AI, I'm proud of how organized and logical my
+code is. I plan on working on this program in the future to fully flesh it out.
